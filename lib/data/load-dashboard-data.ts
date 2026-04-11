@@ -2,6 +2,7 @@ import { readFile } from "node:fs/promises"
 import path from "node:path"
 import { parse } from "csv-parse/sync"
 import type { FilterableNewsItem } from "@/lib/selectors/filter-items"
+import { withBasePath } from "@/lib/utils/base-path"
 
 type CsvRow = {
   kode_prov: string
@@ -70,7 +71,7 @@ export async function loadDashboardData(): Promise<FilterableNewsItem[]> {
       ].join("-"),
       title: row.r421_desk || "Deskripsi usaha tidak tersedia",
       date: "Data lokal sensus ekonomi",
-      image: "/images/img1.png",
+      image: withBasePath("/images/img1.png"),
       p421Code,
       p424Code,
       p425Code,

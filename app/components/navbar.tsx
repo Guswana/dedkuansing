@@ -1,4 +1,5 @@
 import Image from "next/image"
+import { withBasePath } from "@/lib/utils/base-path"
 
 export default function Navbar() {
   return (
@@ -11,7 +12,7 @@ export default function Navbar() {
             aria-label="Toggle sidebar"
           >
             <Image
-              src="/images/logo.png"
+              src={withBasePath("/images/logo.png")}
               alt="Toggle sidebar"
               width={60}
               height={60}

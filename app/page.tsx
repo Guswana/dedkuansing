@@ -4,6 +4,7 @@ import DashboardSidebar from "./components/dashboard-sidebar"
 import BusinessStatsDashboard from "./components/business-stats-dashboard"
 import Footer from "./components/footer"
 import { loadDashboardData } from "@/lib/data/load-dashboard-data"
+import { withBasePath } from "@/lib/utils/base-path"
 
 export default async function Home() {
   const data = await loadDashboardData()
@@ -37,7 +38,7 @@ export default async function Home() {
           <div className="rounded-2xl border border-orange-200/80 bg-orange-50/65 p-4 md:p-5">
             <section className="relative mb-6 overflow-hidden rounded-2xl border border-orange-200/90">
               <Image
-                src="/images/img1.png"
+                src={withBasePath("/images/img1.png")}
                 alt="Kegiatan statistik BPS"
                 width={1200}
                 height={450}
