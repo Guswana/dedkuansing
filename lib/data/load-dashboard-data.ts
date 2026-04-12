@@ -2,7 +2,6 @@ import { readFile } from "node:fs/promises"
 import path from "node:path"
 import { parse } from "csv-parse/sync"
 import type { FilterableNewsItem } from "@/lib/selectors/filter-items"
-import { withBasePath } from "@/lib/utils/base-path"
 
 type CsvRow = {
   kode_prov: string
@@ -27,6 +26,15 @@ function normalizeCode(value: string, digit = 2) {
   }
 
   return String(onlyNumber).padStart(digit, "0")
+}
+
+function normalizeRegionCode(value: string, digit: number) {
+  const cleaned = String(value ?? "").replace(/\.0+$/, "").trim()
+  if (!cleaned) {
+    return ""
+  }
+
+  return cleaned.padStart(digit, "0")
 }
 
 function decodeP426(value: string) {
@@ -57,6 +65,7 @@ export async function loadDashboardData(): Promise<FilterableNewsItem[]> {
     const p424Code = normalizeCode(row.r424)
     const p425Code = normalizeCode(row.r425, 1)
     const p426Codes = decodeP426(row.r426)
+    const kodeKec = normalizeRegionCode(row.kode_kec, 2)
 
     return {
       id: [
@@ -70,8 +79,7 @@ export async function loadDashboardData(): Promise<FilterableNewsItem[]> {
         row.id_art,
       ].join("-"),
       title: row.r421_desk || "Deskripsi usaha tidak tersedia",
-      date: "Data lokal sensus ekonomi",
-      image: withBasePath("/images/img1.png"),
+      kodeKec,
       p421Code,
       p424Code,
       p425Code,

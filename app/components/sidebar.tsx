@@ -1,9 +1,10 @@
+import KecamatanFilter from "./filters/kecamatan-filter"
 import P421Filter from "./filters/p421-filter"
 import P424Filter from "./filters/p424-filter"
 import P425Filter from "./filters/p425-filter"
 import P426Filter from "./filters/p426-filter"
 
-export default function DashboardSidebar() {
+export default function Sidebar() {
   return (
     <aside className="flex h-full flex-col border-r border-orange-300/80 bg-gradient-to-b from-orange-100 to-orange-50">
       <div className="p-3">
@@ -14,6 +15,7 @@ export default function DashboardSidebar() {
       </div>
 
       <div className="flex-1 space-y-3 overflow-y-auto px-3 pb-3">
+        <KecamatanFilter />
         <P421Filter />
         <P424Filter />
         <P425Filter />

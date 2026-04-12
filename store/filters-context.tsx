@@ -5,6 +5,7 @@ import type { P421FilterState } from "@/types/p421"
 import type { P424FilterState } from "@/types/p424"
 import type { P425FilterState } from "@/types/p425"
 import type { P426FilterState } from "@/types/p426"
+import type { KecFilterState } from "@/types/kec"
 
 type BaseFilterState = {
   selectedCodes: string[]
@@ -12,6 +13,7 @@ type BaseFilterState = {
 }
 
 export type GlobalFiltersState = {
+  kec: KecFilterState
   p421: P421FilterState
   p424: P424FilterState
   p425: P425FilterState
@@ -35,6 +37,7 @@ const emptyFilterState = (): BaseFilterState => ({
 })
 
 const initialState: GlobalFiltersState = {
+  kec: emptyFilterState(),
   p421: emptyFilterState(),
   p424: emptyFilterState(),
   p425: emptyFilterState(),

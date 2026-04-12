@@ -6,6 +6,7 @@ import {
   buildNewsMetaLabel,
   type FilterableNewsItem,
 } from "@/lib/selectors/filter-items"
+import { withBasePath } from "@/lib/utils/base-path"
 
 export default function NewsFeed({ items }: { items: FilterableNewsItem[] }) {
   const filteredItems = useFilteredNews(items)
@@ -18,10 +19,10 @@ export default function NewsFeed({ items }: { items: FilterableNewsItem[] }) {
       <div className="grid gap-5 md:grid-cols-2">
         {filteredItems.map((item, index) => (
           <Card
-            key={item.id ?? `${item.title}-${item.date}-${index}`}
+            key={item.id ?? `${item.title}-${index}`}
             title={item.title}
-            date={item.date}
-            image={item.image}
+            date="Data lokal sensus ekonomi"
+            image={withBasePath("/images/img1.png")}
             sectorLabel={buildNewsMetaLabel(item) || "Kategori tidak tersedia"}
           />
         ))}

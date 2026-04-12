@@ -7,18 +7,19 @@ import type { FilterKey, GlobalFiltersState } from "@/store/filters-context"
 export type FilterableNewsItem = {
   id?: string
   title: string
-  date: string
-  image: string
+  kodeKec?: string
   p421Code?: string
   p424Code?: string
   p425Code?: string
   p426Codes?: string[]
 }
 
-const GROUP_KEYS: FilterKey[] = ["p421", "p424", "p425", "p426"]
+const GROUP_KEYS: FilterKey[] = ["kec", "p421", "p424", "p425", "p426"]
 
 function getItemCodes(item: FilterableNewsItem, key: FilterKey): string[] {
   switch (key) {
+    case "kec":
+      return item.kodeKec ? [item.kodeKec] : []
     case "p421":
       return item.p421Code ? [item.p421Code] : []
     case "p424":
