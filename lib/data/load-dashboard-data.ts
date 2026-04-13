@@ -65,7 +65,7 @@ export async function loadDashboardData(): Promise<FilterableNewsItem[]> {
     const p424Code = normalizeCode(row.r424)
     const p425Code = normalizeCode(row.r425, 1)
     const p426Codes = decodeP426(row.r426)
-    const kodeKec = normalizeRegionCode(row.kode_kec, 2)
+    const kodeKec = normalizeRegionCode(row.kode_kec, 3)
 
     return {
       id: [

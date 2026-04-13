@@ -77,7 +77,7 @@ export default function P421Filter() {
                     className="mt-0.5 h-4 w-4 rounded border-orange-400 text-orange-600 focus:ring-orange-500"
                   />
                   <span className="font-sans">
-                    <span className="mr-1">{item.code}.</span>
+                    <span className="mr-1">0{item.code}.</span>
                     {item.label}
                   </span>
                 </label>
