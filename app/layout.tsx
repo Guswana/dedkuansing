@@ -1,16 +1,11 @@
 import type { Metadata } from "next";
-import { JetBrains_Mono, Merriweather, Plus_Jakarta_Sans } from "next/font/google";
+import { JetBrains_Mono, Inter } from "next/font/google";
 import "./globals.css";
 
-const plusJakartaSans = Plus_Jakarta_Sans({
-  variable: "--font-plus-jakarta",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
-});
-
-const merriweather = Merriweather({
-  variable: "--font-merriweather",
-  subsets: ["latin"],
-  weight: ["400", "700", "900"],
+  weight: ["300", "400", "500", "600", "700", "800", "900"],
 });
 
 const jetBrainsMono = JetBrains_Mono({
@@ -33,7 +28,7 @@ export default function RootLayout({
   return (
     <html lang="id">
       <body
-        className={`${plusJakartaSans.variable} ${merriweather.variable} ${jetBrainsMono.variable} min-h-screen bg-orange-50 text-stone-900 antialiased`}
+        className={`${inter.variable} ${jetBrainsMono.variable} min-h-screen bg-orange-50 text-stone-900 antialiased`}
       >
         <FiltersProvider>
           {children}

@@ -1,9 +1,9 @@
 export default function Footer() {
   return (
-    <footer className="mt-8 pl-8 Sw-full border-t border-orange-300 bg-orange-800 py-6 text-orange-50 md:py-8">
+    <footer className="mt-8 pl-8 Sw-full border-t border-orange-300 bg-orange-800 py-6 text-orange-50 md:py-8 font-sans">
       <div className="grid w-full gap-12 px-2 md:grid-cols-2 lg:px-3 xl:grid-cols-3">
         <div>
-          <h3 className="font-[family-name:var(--font-heading)] text-lg text-orange-50">BPS Kabupaten Kuantan Singingi</h3>
+          <h3 className="font-sans text-lg text-orange-50">BPS Kabupaten Kuantan Singingi</h3>
           <p className="mt-2 text-sm text-orange-100/90">Dashboard Ekonomi Digital Kuantan Singingi menyajikan data statistik usaha digital yang akurat untuk kesuksesan pelaksanaan Sensus Ekonomi 2026.</p>
         </div>
         <div>

@@ -24,7 +24,7 @@ export default function Card({ title, date, image, sectorLabel }: Props) {
           <p className="mb-1 text-[11px] font-semibold uppercase tracking-wide text-orange-700">{sectorLabel}</p>
         ) : null}
         <p className="text-xs font-medium uppercase tracking-wide text-orange-700">{date}</p>
-        <h3 className="mt-2 font-[family-name:var(--font-heading)] text-base font-bold leading-snug text-stone-800 md:text-lg">
+        <h3 className="mt-2 font-sans text-base font-bold leading-snug text-stone-800 md:text-lg">
           {title}
         </h3>
         <p className="mt-3 text-sm font-semibold text-orange-600">Baca ringkasan</p>

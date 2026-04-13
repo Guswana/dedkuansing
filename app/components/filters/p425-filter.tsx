@@ -14,7 +14,7 @@ export default function P425Filter() {
     <section className="rounded-2xl border border-orange-200 bg-orange-50/85 p-4 md:p-5">
       <div className="flex items-start justify-between gap-3">
         <div>
-          <h3 className="font-[family-name:var(--font-heading)] text-lg font-bold text-orange-900">Skala Omzet</h3>
+          <h3 className="font-sans text-lg font-bold text-orange-900">Skala Omzet</h3>
         </div>
         <button
           type="button"
@@ -76,8 +76,8 @@ export default function P425Filter() {
                     onChange={() => toggleCode(item.code)}
                     className="mt-0.5 h-4 w-4 rounded border-orange-400 text-orange-600 focus:ring-orange-500"
                   />
-                  <span>
-                    <span className="mr-1 font-semibold">{item.code}.</span>
+                  <span className="font-sans">
+                    <span className="mr-1">{item.code}.</span>
                     {item.label}
                   </span>
                 </label>

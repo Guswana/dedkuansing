@@ -93,14 +93,14 @@ function buildKecamatanEntries(
 function BarChart({ title, data }: { title: string; data: ChartEntry[] }) {
   return (
     <div className="rounded-2xl border border-orange-200 bg-white/85 p-5 shadow-sm">
-      <h3 className="font-[family-name:var(--font-heading)] text-lg font-bold text-orange-900">{title}</h3>
+      <h3 className="font-sans text-lg font-bold text-orange-900">{title}</h3>
       <div className="mt-4 space-y-3">
         {data.length === 0 ? (
           <p className="text-sm text-orange-800/80">Belum ada data sesuai filter.</p>
         ) : (
           data.map((item) => (
             <div key={`${title}-${item.code}`}>
-              <div className="mb-1 flex items-center justify-between gap-4 text-xs">
+              <div className="mb-1 flex items-center justify-between gap-4 text-xs font-sans">
                 <p className="line-clamp-1 font-semibold text-stone-700">{item.code}. {item.label}</p>
                 <p className="whitespace-nowrap font-bold text-orange-700">{item.count} ({item.percent.toFixed(1)}%)</p>
               </div>
@@ -137,7 +137,7 @@ export default function BusinessStatsDashboard({ items }: { items: FilterableNew
 
   return (
     <section className="space-y-5">
-      <div className="rounded-2xl border border-orange-300 bg-orange-100/85 p-5">
+      <div className="rounded-2xl border border-orange-300 bg-orange-100/85 p-5 font-sans">
         <p className="text-sm text-orange-800">Total data usaha sesuai filter</p>
         <p className="mt-1 text-3xl font-black text-orange-900">{totalUsaha.toLocaleString("id-ID")}</p>
         <p className="mt-2 text-sm text-orange-800/90">
