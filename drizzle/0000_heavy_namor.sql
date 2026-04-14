@@ -1,0 +1,21 @@
+CREATE TABLE `data_final` (
+	`id` integer PRIMARY KEY AUTOINCREMENT NOT NULL,
+	`kode_prov` integer,
+	`kode_kab` integer,
+	`kode_kec` integer,
+	`kode_desa` integer,
+	`kode_sls` integer,
+	`kode_subsls` integer,
+	`id_rt` integer,
+	`id_art` integer,
+	`r420a` real,
+	`r420b` real,
+	`r421` integer,
+	`r421_desk` text,
+	`r422` real,
+	`r423` real,
+	`r424` integer,
+	`r425` real,
+	`r426` real,
+	`r421_kode` real
+);
