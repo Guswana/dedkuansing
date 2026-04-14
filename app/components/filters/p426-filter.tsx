@@ -7,19 +7,22 @@ import { useCodeFilter } from "@/store/filters-context"
 
 export default function P426Filter() {
   const { state, setKeyword, toggleCode, clearCodes } = useCodeFilter("p426")
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(true)
   const hasSelected = state.selectedCodes.length > 0
 
   return (
-    <section className="rounded-2xl border border-orange-200 bg-orange-50/85 p-4 md:p-5">
+    <section className="rounded-2xl border p-4 md:p-5" style={{ borderColor: 'rgba(232, 129, 50, 0.2)', backgroundColor: '#FFFFFF' }}>
       <div className="flex items-start justify-between gap-3">
         <div>
-          <h3 className="font-sans text-lg font-bold text-orange-900">Pemanfaatan Digital</h3>
+          <h3 className="font-sans text-lg font-bold" style={{ color: '#E88132' }}>Pemanfaatan Digital</h3>
         </div>
         <button
           type="button"
           onClick={() => setIsOpen((prev) => !prev)}
-          className="inline-flex h-8 w-8 items-center justify-center rounded-lg border border-orange-300 text-orange-700 transition hover:bg-orange-100"
+          className="inline-flex h-8 w-8 items-center justify-center rounded-lg border transition"
+          style={{ borderColor: 'rgba(232, 129, 50, 0.3)', color: '#E88132', backgroundColor: 'rgba(249, 244, 238, 0.5)' }}
+          onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#F9F4EE'}
+          onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'rgba(249, 244, 238, 0.5)'}
         >
           {isOpen ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
         </button>
@@ -32,8 +35,9 @@ export default function P426Filter() {
               type="text"
               value={state.keyword}
               onChange={(event) => setKeyword(event.target.value)}
-              placeholder="Cari fungsi pemanfaatan digital..."
-              className="w-full rounded-xl border border-orange-300 bg-white px-3 py-2 text-sm text-stone-800 outline-none ring-orange-400 focus:ring"
+              placeholder="Cari kategori pemanfaatan digital..."
+              className="w-full rounded-xl border bg-white px-3 py-2 text-sm outline-none focus:ring"
+              style={{ borderColor: 'rgba(232, 129, 50, 0.3)', color: '#333333' }}
             />
             <div className="group relative">
               <button
@@ -41,7 +45,8 @@ export default function P426Filter() {
                 onClick={clearCodes}
                 disabled={!hasSelected}
                 title={hasSelected ? "Kosongkan pilihan" : undefined}
-                className={`inline-flex h-10 w-10 items-center justify-center rounded-xl border bg-white transition ${hasSelected ? "border-red-300 bg-red-200 text-red-600 hover:bg-red-50" : "border-orange-200 text-orange-300 cursor-not-allowed"}`}
+                className={`inline-flex h-10 w-10 items-center justify-center rounded-xl border bg-white transition ${hasSelected ? "border-red-300 text-red-600 hover:bg-red-50" : "cursor-not-allowed"}`}
+                style={{ borderColor: hasSelected ? undefined : 'rgba(232, 129, 50, 0.2)', color: hasSelected ? undefined : 'rgba(232, 129, 50, 0.4)' }}
                 aria-label="Kosongkan pilihan"
               >
                 <X className="h-4 w-4" />
@@ -68,13 +73,21 @@ export default function P426Filter() {
               return (
                 <label
                   key={item.code}
-                  className={`flex cursor-pointer items-start gap-3 rounded-xl border px-3 py-2 text-sm transition ${checked ? "border-orange-500 bg-orange-100 text-orange-950" : "border-orange-200 bg-white text-stone-700 hover:border-orange-300"}`}
+                  className={`flex cursor-pointer items-start gap-3 rounded-xl border px-3 py-2 text-sm transition ${checked ? "" : "hover:border-orange-300"}`}
+                  style={{
+                    borderColor: checked ? '#E88132' : 'rgba(232, 129, 50, 0.2)',
+                    backgroundColor: checked ? '#F9F4EE' : '#FFFFFF',
+                    color: '#333333'
+                  }}
+                  onMouseEnter={(e) => !checked && (e.currentTarget.style.borderColor = 'rgba(232, 129, 50, 0.5)')}
+                  onMouseLeave={(e) => !checked && (e.currentTarget.style.borderColor = 'rgba(232, 129, 50, 0.2)')}
                 >
                   <input
                     type="checkbox"
                     checked={checked}
                     onChange={() => toggleCode(item.code)}
-                    className="mt-0.5 h-4 w-4 rounded border-orange-400 text-orange-600 focus:ring-orange-500"
+                    className="mt-0.5 h-4 w-4 rounded focus:ring"
+                    style={{ borderColor: 'rgba(232, 129, 50, 0.4)', accentColor: '#E88132' }}
                   />
                   <span className="font-sans">
                     <span className="mr-1">{item.code}.</span>

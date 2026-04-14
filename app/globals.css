@@ -49,38 +49,38 @@
 }
 
 :root {
-  --background: oklch(0.97 0.022 78.11);
-  --foreground: oklch(0.29 0.048 44.85);
-  --card: oklch(0.99 0.014 84.14);
-  --card-foreground: oklch(0.27 0.042 45.37);
-  --popover: oklch(0.99 0.01 83.06);
-  --popover-foreground: oklch(0.28 0.04 45.69);
-  --primary: oklch(0.72 0.168 53.86);
-  --primary-foreground: oklch(0.99 0.01 83.4);
-  --secondary: oklch(0.9 0.048 75.23);
-  --secondary-foreground: oklch(0.33 0.055 45.55);
-  --muted: oklch(0.94 0.03 80.23);
-  --muted-foreground: oklch(0.47 0.054 47.72);
-  --accent: oklch(0.8 0.158 66.31);
-  --accent-foreground: oklch(0.28 0.047 46.67);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.85 0.053 71.33);
-  --input: oklch(0.85 0.053 71.33);
-  --ring: oklch(0.74 0.162 58.04);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  --background: oklch(0.97 0.01 83.4); /* Krem Lembut #F9F4EE */
+  --foreground: oklch(0.25 0 0); /* Cokelat Gelap #333333 */
+  --card: oklch(1 0 0); /* Putih Bersih #FFFFFF */
+  --card-foreground: oklch(0.25 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.25 0 0);
+  --primary: oklch(0.71 0.18 65.6); /* Oranye Utama #E88132 */
+  --primary-foreground: oklch(1 0 0);
+  --secondary: oklch(0.83 0.15 75.8); /* Oranye Muda #FBAF5D */
+  --secondary-foreground: oklch(0.25 0 0);
+  --muted: oklch(0.95 0.005 83.4);
+  --muted-foreground: oklch(0.45 0 0);
+  --accent: oklch(0.62 0.18 236.8); /* Biru BPS #00A1E4 */
+  --accent-foreground: oklch(1 0 0);
+  --destructive: oklch(0.62 0.22 30.5);
+  --border: oklch(0.85 0.04 75.8);
+  --input: oklch(0.85 0.04 75.8);
+  --ring: oklch(0.71 0.18 65.6);
+  --chart-1: oklch(0.71 0.18 65.6); /* Oranye Utama */
+  --chart-2: oklch(0.83 0.15 75.8); /* Oranye Muda */
+  --chart-3: oklch(0.62 0.18 236.8); /* Biru BPS */
+  --chart-4: oklch(0.66 0.16 146.3); /* Hijau BPS */
+  --chart-5: oklch(0.35 0 0);
+  --radius: 0.875rem;
+  --sidebar: oklch(0.97 0.01 83.4);
+  --sidebar-foreground: oklch(0.25 0 0);
+  --sidebar-primary: oklch(0.71 0.18 65.6);
+  --sidebar-primary-foreground: oklch(1 0 0);
+  --sidebar-accent: oklch(0.93 0.02 75.8);
+  --sidebar-accent-foreground: oklch(0.25 0 0);
+  --sidebar-border: oklch(0.85 0.04 75.8);
+  --sidebar-ring: oklch(0.71 0.18 65.6);
 }
 
 .dark {
@@ -124,9 +124,8 @@
   body {
     @apply bg-background text-foreground;
     background-image:
-      radial-gradient(circle at 12% 12%, rgba(251, 146, 60, 0.32), transparent 34%),
-      radial-gradient(circle at 88% 24%, rgba(245, 158, 11, 0.28), transparent 30%),
-      linear-gradient(180deg, rgba(255, 237, 213, 0.88) 0%, rgba(255, 247, 237, 1) 100%);
+      radial-gradient(circle at 12% 12%, rgba(232, 129, 50, 0.12), transparent 34%),
+      radial-gradient(circle at 88% 24%, rgba(251, 175, 93, 0.08), transparent 30%);
   }
   html {
     @apply font-sans;

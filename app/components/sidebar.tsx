@@ -6,11 +6,11 @@ import P426Filter from "./filters/p426-filter"
 
 export default function Sidebar() {
   return (
-    <aside className="flex h-full flex-col border-r border-orange-300/80 bg-gradient-to-b from-orange-100 to-orange-50">
+    <aside className="flex h-full flex-col border-r shadow-sm" style={{ borderColor: 'rgba(232, 129, 50, 0.3)', backgroundColor: '#E88132' }}>
       <div className="p-3">
-        <div className="rounded-xl border border-orange-300 bg-orange-200/70 px-3 py-3">
-          <h2 className="font-sans text-lg font-black text-orange-900">Filter Dashboard</h2>
-          <p className="mt-1 text-xs text-orange-800/85 font-sans">Atur kombinasi filter untuk melihat perubahan statistik usaha secara langsung.</p>
+        <div className="rounded-xl border bg-white/90 px-3 py-3 shadow-sm" style={{ borderColor: 'rgba(232, 129, 50, 0.4)' }}>
+          <h2 className="font-sans text-lg font-black" style={{ color: '#E88132' }}>Filter Dashboard</h2>
+          <p className="mt-1 text-xs text-neutral-700/85 font-sans">Atur kombinasi filter untuk melihat perubahan statistik usaha secara langsung.</p>
         </div>
       </div>
 

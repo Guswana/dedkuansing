@@ -14,7 +14,7 @@ export default async function Home() {
   ]
 
   return (
-    <main className="min-h-screen bg-orange-50">
+    <main className="min-h-screen" style={{ backgroundColor: '#F9F4EE' }}>
       <Navbar />
 
       <div className="flex min-h-[calc(100vh-5rem)]">
@@ -34,9 +34,9 @@ export default async function Home() {
           <Sidebar />
         </div>
 
-        <section className="min-w-0 flex-1 px-3 py-4 md:px-5">
-          <div className="rounded-2xl border border-orange-200/80 bg-orange-50/65 p-4 md:p-5">
-            <section className="relative mb-6 overflow-hidden rounded-2xl border border-orange-200/90">
+        <section className="min-w-0 flex-1 px-3 py-4 md:px-5 bg-white">
+          <div className="rounded-2xl border bg-white p-4 md:p-5" style={{ borderColor: 'rgba(232, 129, 50, 0.3)' }}>
+            <section className="relative mb-6 overflow-hidden rounded-2xl border" style={{ borderColor: 'rgba(232, 129, 50, 0.4)' }}>
               <Image
                 src={withBasePath("/images/img1.jpeg")}
                 alt="Kegiatan statistik BPS"
@@ -45,17 +45,17 @@ export default async function Home() {
                 className="h-52 w-full object-cover md:h-70"
                 priority
               />
-              <div className="absolute inset-0 bg-gradient-to-r from-orange-900/80 via-orange-800/55 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
               <div className="absolute inset-0 p-5 md:p-7">
                 <h1 className="mt-3 max-w-2xl font-sans text-xl font-black text-white md:text-3xl">
                   Dashboard Ekonomi Digital Kuantan Singingi
                 </h1>
-                <p className="mt-2 max-w-2xl text-sm text-orange-50/95 md:text-base font-sans">
+                <p className="mt-2 max-w-2xl text-sm text-white/95 md:text-base font-sans">
                   Platform visualisasi statistik usaha digital untuk mendukung dan menyukseskan perencanaan, pelaksanaan, pemantauan, dan evaluasi kegiatan sensus ekonomi 2026 di Kabupaten Kuantan Singingi.
                 </p>
                 <div className="mt-3 flex flex-wrap gap-2">
                   {highlights.map((item) => (
-                    <span key={item} className="rounded-lg border border-orange-100/60 bg-white/10 px-2.5 py-1 text-xs text-orange-50/95 font-sans">
+                    <span key={item} className="rounded-lg border border-white/40 bg-white/10 px-2.5 py-1 text-xs text-white/95 font-sans">
                       {item}
                     </span>
                   ))}
@@ -65,10 +65,10 @@ export default async function Home() {
 
             <div className="mb-6 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
               <div>
-                <h2 className="font-sans text-2xl font-black text-stone-800 md:text-3xl">Statistik Usaha Digital di Kabupaten Kuantan Singingi</h2>
-                <p className="mt-2 text-sm text-orange-900/75 md:text-base font-sans">Setiap diagram menyesuaikan pilihan filter secara real-time.</p>
+                <h2 className="font-sans text-2xl font-black text-neutral-800 md:text-3xl">Statistik Usaha Digital di Kabupaten Kuantan Singingi</h2>
+                <p className="mt-2 text-sm text-neutral-600/75 md:text-base font-sans">Setiap diagram menyesuaikan pilihan filter secara real-time.</p>
               </div>
-              <p className="text-sm font-semibold text-orange-700 font-sans">Sumber: Kumpulan Data Survei Usaha Tahun 2025</p>
+              <p className="text-sm font-semibold font-sans" style={{ color: '#E88132' }}>Sumber: Kumpulan Data Survei Usaha Tahun 2025</p>
             </div>
 
             <BusinessStatsDashboard items={data} />

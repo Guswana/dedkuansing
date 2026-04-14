@@ -92,22 +92,25 @@ function buildKecamatanEntries(
 
 function BarChart({ title, data }: { title: string; data: ChartEntry[] }) {
   return (
-    <div className="rounded-2xl border border-orange-200 bg-white/85 p-5 shadow-sm">
-      <h3 className="font-sans text-lg font-bold text-orange-900">{title}</h3>
+    <div className="rounded-2xl border border-orange-200 bg-white/90 p-5 shadow-sm" style={{ borderColor: 'rgba(232, 129, 50, 0.3)' }}>
+      <h3 className="font-sans text-lg font-bold text-neutral-800">{title}</h3>
       <div className="mt-4 space-y-3">
         {data.length === 0 ? (
-          <p className="text-sm text-orange-800/80">Belum ada data sesuai filter.</p>
+          <p className="text-sm text-neutral-600/80">Belum ada data sesuai filter.</p>
         ) : (
           data.map((item) => (
             <div key={`${title}-${item.code}`}>
               <div className="mb-1 flex items-center justify-between gap-4 text-xs font-sans">
-                <p className="line-clamp-1 font-semibold text-stone-700">{item.code}. {item.label}</p>
-                <p className="whitespace-nowrap font-bold text-orange-700">{item.count} ({item.percent.toFixed(1)}%)</p>
+                <p className="line-clamp-1 font-semibold text-neutral-700">{item.code}. {item.label}</p>
+                <p className="whitespace-nowrap font-bold" style={{ color: '#E88132' }}>{item.count} ({item.percent.toFixed(1)}%)</p>
               </div>
-              <div className="h-2 rounded-full bg-orange-100">
+              <div className="h-2 rounded-full" style={{ backgroundColor: 'rgba(251, 175, 93, 0.3)' }}>
                 <div
-                  className="h-2 rounded-full bg-gradient-to-r from-orange-500 to-amber-500"
-                  style={{ width: `${Math.max(item.percent, 2)}%` }}
+                  className="h-2 rounded-full"
+                  style={{ 
+                    width: `${Math.max(item.percent, 2)}%`,
+                    background: 'linear-gradient(to right, #E88132, #FBAF5D)'
+                  }}
                 />
               </div>
             </div>
@@ -137,10 +140,10 @@ export default function BusinessStatsDashboard({ items }: { items: FilterableNew
 
   return (
     <section className="space-y-5">
-      <div className="rounded-2xl border border-orange-300 bg-orange-100/85 p-5 font-sans">
-        <p className="text-sm text-orange-800">Total data usaha sesuai filter</p>
-        <p className="mt-1 text-3xl font-black text-orange-900">{totalUsaha.toLocaleString("id-ID")}</p>
-        <p className="mt-2 text-sm text-orange-800/90">
+      <div className="rounded-2xl border p-5 font-sans" style={{ borderColor: 'rgba(232, 129, 50, 0.5)', backgroundColor: 'rgba(232, 129, 50, 0.12)' }}>
+        <p className="text-sm text-neutral-700">Total data usaha sesuai filter</p>
+        <p className="mt-1 text-3xl font-black" style={{ color: '#E88132' }}>{totalUsaha.toLocaleString("id-ID")}</p>
+        <p className="mt-2 text-sm text-neutral-600/90">
           Mencakup <span className="font-bold">{totalKecamatan}</span> kecamatan.
         </p>
       </div>
