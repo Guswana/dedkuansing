@@ -28,8 +28,7 @@ export default function RootLayout({
   return (
     <html lang="id">
       <body
-        className={`${inter.variable} ${jetBrainsMono.variable} min-h-screen text-neutral-900 antialiased`}
-        style={{ backgroundColor: '#F9F4EE' }}
+        className={`${inter.variable} ${jetBrainsMono.variable} min-h-screen bg-background text-neutral-900 antialiased`}
       >
         <FiltersProvider>
           {children}

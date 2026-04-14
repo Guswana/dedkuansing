@@ -1,0 +1,27 @@
+Oranye Utama	#E88132	
+Oranye Muda	#FBAF5D	
+Biru BPS	#00A1E4	
+Hijau BPS	#4CB050	
+Cokelat Gelap	#333333	
+Krem Lembut	#F9F4EE	
+Putih Bersih	#FFFFFF	
+
+// Cara menggunakan warna dalam Tailwind CSS:
+// Warna teks
+text-primary       // #E88132
+text-primary-300   // #FBAF5D
+text-accent        // #00A1E4
+
+// Warna background
+bg-primary         // #E88132
+bg-primary/10      // rgba(232, 129, 50, 0.1)
+bg-primary/12      // rgba(232, 129, 50, 0.12)
+bg-primary/30      // rgba(232, 129, 50, 0.3)
+
+// Warna border
+border-primary     // #E88132
+border-primary/30  // rgba(232, 129, 50, 0.3)
+border-primary/50  // rgba(232, 129, 50, 0.5)
+
+// Gradient
+bg-gradient-to-r from-primary to-primary-300

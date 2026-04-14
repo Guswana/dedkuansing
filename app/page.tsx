@@ -14,7 +14,7 @@ export default async function Home() {
   ]
 
   return (
-    <main className="min-h-screen" style={{ backgroundColor: '#F9F4EE' }}>
+    <main className="min-h-screen bg-background">
       <Navbar />
 
       <div className="flex min-h-[calc(100vh-5rem)]">
@@ -35,8 +35,8 @@ export default async function Home() {
         </div>
 
         <section className="min-w-0 flex-1 px-3 py-4 md:px-5 bg-white">
-          <div className="rounded-2xl border bg-white p-4 md:p-5" style={{ borderColor: 'rgba(232, 129, 50, 0.3)' }}>
-            <section className="relative mb-6 overflow-hidden rounded-2xl border" style={{ borderColor: 'rgba(232, 129, 50, 0.4)' }}>
+          <div className="rounded-2xl border border-primary/30 bg-white p-4 md:p-5">
+            <section className="relative mb-6 overflow-hidden rounded-2xl border border-primary/40">
               <Image
                 src={withBasePath("/images/img1.jpeg")}
                 alt="Kegiatan statistik BPS"
@@ -68,7 +68,7 @@ export default async function Home() {
                 <h2 className="font-sans text-2xl font-black text-neutral-800 md:text-3xl">Statistik Usaha Digital di Kabupaten Kuantan Singingi</h2>
                 <p className="mt-2 text-sm text-neutral-600/75 md:text-base font-sans">Setiap diagram menyesuaikan pilihan filter secara real-time.</p>
               </div>
-              <p className="text-sm font-semibold font-sans" style={{ color: '#E88132' }}>Sumber: Kumpulan Data Survei Usaha Tahun 2025</p>
+              <p className="text-sm font-semibold font-sans text-primary">Sumber: Kumpulan Data Survei Usaha Tahun 2025</p>
             </div>
 
             <BusinessStatsDashboard items={data} />

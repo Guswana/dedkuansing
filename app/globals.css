@@ -39,6 +39,33 @@
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
+  
+  /* Warna kustom terpusat */
+  --color-primary-50: oklch(0.98 0.03 75.8);
+  --color-primary-100: oklch(0.95 0.07 75.8);
+  --color-primary-200: oklch(0.90 0.12 75.8);
+  --color-primary-300: oklch(0.83 0.15 75.8);
+  --color-primary-400: oklch(0.77 0.17 70.7);
+  --color-primary-500: oklch(0.71 0.18 65.6);
+  --color-primary-600: oklch(0.65 0.18 60.5);
+  --color-primary-700: oklch(0.58 0.17 55.4);
+  --color-primary-800: oklch(0.50 0.15 50.3);
+  --color-primary-900: oklch(0.42 0.12 45.2);
+  
+  /* Warna transparan */
+  --color-primary/10: rgba(232, 129, 50, 0.1);
+  --color-primary/12: rgba(232, 129, 50, 0.12);
+  --color-primary/20: rgba(232, 129, 50, 0.2);
+  --color-primary/30: rgba(232, 129, 50, 0.3);
+  --color-primary/40: rgba(232, 129, 50, 0.4);
+  --color-primary/50: rgba(232, 129, 50, 0.5);
+  
+  --color-primary-300/30: rgba(251, 175, 93, 0.3);
+  --color-primary-300/8: rgba(251, 175, 93, 0.08);
+  
+  /* Gradient */
+  --gradient-primary: linear-gradient(to right, var(--color-primary), var(--color-primary-300));
+  
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
@@ -150,4 +177,17 @@
 .animate-fade-up-delay {
   animation: fadeUp 900ms ease-out both;
   animation-delay: 120ms;
+}
+
+/* Custom utilities untuk filter buttons */
+.filter-button-base {
+  @apply border border-primary/30 text-primary bg-primary/5 hover:bg-background transition-colors;
+}
+
+.filter-button-unchecked {
+  @apply border border-primary/20 text-primary/40 hover:border-primary/50 transition-colors;
+}
+
+.checkbox-accent {
+  accent-color: var(--color-primary);
 }
