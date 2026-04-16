@@ -9,7 +9,9 @@ import { getCurrentUser } from "@/app/actions/auth"
 import { getBusinessById, updateBusinessData } from "@/app/actions/business"
 import { KECAMATAN_LIST } from "@/data/master/kecamatan"
 import { P421_LIST } from "@/data/master/p421"
+import { P424_LIST } from "@/data/master/p424"
 import { P425_LIST } from "@/data/master/p425"
+import { P426_LIST } from "@/data/master/p426"
 
 export default function EditUsahaPage() {
   const [user, setUser] = useState<{id: number, username: string, name?: string | null, role?: string | null} | null>(null)
@@ -33,7 +35,11 @@ export default function EditUsahaPage() {
     r421: '',
     r424: '',
     r425: '',
+    r426: 0,
   })
+
+  // State untuk checkbox P426 (bitmask)
+  const [selectedP426, setSelectedP426] = useState<string[]>([])
 
   useEffect(() => {
     async function checkAuthAndLoadData() {
@@ -62,7 +68,18 @@ export default function EditUsahaPage() {
             r421: result.data.r421?.toString() || '',
             r424: result.data.r424?.toString() || '',
             r425: result.data.r425?.toString() || '',
+            r426: result.data.r426 || 0,
           })
+
+          // Decode bitmask menjadi checkbox yang terpilih
+          const decodedP426: string[] = []
+          P426_LIST.forEach(item => {
+            const code = parseInt(item.code)
+            if (result.data.r426 && (result.data.r426 & code) === code) {
+              decodedP426.push(item.code)
+            }
+          })
+          setSelectedP426(decodedP426)
         } else {
           setErrorMessage('Data tidak ditemukan')
         }
@@ -80,6 +97,25 @@ export default function EditUsahaPage() {
       ...prev,
       [name]: value
     }))
+  }
+
+  // Handler untuk checkbox P426 (bitmask)
+  const handleP426Change = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value, checked } = e.target
+    setSelectedP426(prev => {
+      const newSelected = checked 
+        ? [...prev, value]
+        : prev.filter(item => item !== value)
+      
+      // Hitung total bitmask
+      const totalBitmask = newSelected.reduce((sum, code) => sum + parseInt(code), 0)
+      setFormData(prevForm => ({
+        ...prevForm,
+        r426: totalBitmask
+      }))
+      
+      return newSelected
+    })
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -101,6 +137,7 @@ export default function EditUsahaPage() {
         r421: formData.r421 ? parseInt(formData.r421) : null,
         r424: formData.r424 ? parseInt(formData.r424) : null,
         r425: formData.r425 ? parseFloat(formData.r425) : null,
+        r426: formData.r426 > 0 ? formData.r426 : null,
       }
 
       const result = await updateBusinessData(id, businessData)
@@ -319,16 +356,21 @@ export default function EditUsahaPage() {
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Skala Usaha (P424)
+                    Jenis Izin Usaha (P424)
                   </label>
-                  <input
-                    type="number"
+                  <select
                     name="r424"
                     value={formData.r424}
                     onChange={handleInputChange}
                     className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50"
-                    placeholder="1-4"
-                  />
+                  >
+                    <option value="">Pilih Jenis Izin Usaha</option>
+                    {P424_LIST.map(item => (
+                      <option key={item.code} value={parseInt(item.code)}>
+                        {item.label}
+                      </option>
+                    ))}
+                  </select>
                 </div>
 
                 <div>
@@ -348,6 +390,26 @@ export default function EditUsahaPage() {
                       </option>
                     ))}
                   </select>
+                </div>
+
+                <div className="md:col-span-2">
+                  <label className="block text-sm font-medium text-gray-700 mb-3">
+                    Penggunaan Media Internet (P426)
+                  </label>
+                  <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                    {P426_LIST.map(item => (
+                      <label key={item.code} className="flex items-center gap-2 cursor-pointer p-2 hover:bg-gray-50 rounded-lg">
+                        <input
+                          type="checkbox"
+                          value={item.code}
+                          checked={selectedP426.includes(item.code)}
+                          onChange={handleP426Change}
+                          className="w-4 h-4 text-primary border-gray-300 rounded focus:ring-primary"
+                        />
+                        <span className="text-sm text-gray-700">{item.label}</span>
+                      </label>
+                    ))}
+                  </div>
                 </div>
               </div>
 

@@ -71,20 +71,19 @@ export default function BusinessTable({ data, pagination, onPageChange, isLoadin
       <div className="overflow-x-auto">
         <table className="w-full">
           <thead className="bg-gray-50 border-b border-gray-200">
-            <tr>
-              <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-16">No</th>
-              <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
-              <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Deskripsi Usaha</th>
-              <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Kecamatan</th>
-              <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Jenis</th>
-              <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Skala</th>
-              <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-32">Aksi</th>
-            </tr>
+             <tr>
+               <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-16">No</th>
+               <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Deskripsi Usaha</th>
+               <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Kecamatan</th>
+               <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Jenis</th>
+               <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Skala</th>
+               <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-32">Aksi</th>
+             </tr>
           </thead>
           <tbody className="divide-y divide-gray-100">
             {data.length === 0 ? (
               <tr>
-                <td colSpan={7} className="px-4 py-8 text-center text-gray-500">
+                 <td colSpan={6} className="px-4 py-8 text-center text-gray-500">
                   Tidak ada data yang ditemukan
                 </td>
               </tr>
@@ -92,13 +91,12 @@ export default function BusinessTable({ data, pagination, onPageChange, isLoadin
               data.map((item, index) => {
                 const nomorUrut = ((pagination.currentPage - 1) * 10) + index + 1
                 return (
-                  <tr key={item.id} className="hover:bg-gray-50 transition">
-                    <td className="px-4 py-3 text-sm text-gray-600 font-medium">{nomorUrut}</td>
-                    <td className="px-4 py-3 text-sm text-gray-600 font-mono">{item.compositeId}</td>
-                    <td className="px-4 py-3 text-sm text-gray-800">{item.r421Desk || '-'}</td>
-                    <td className="px-4 py-3 text-sm text-gray-600">{item.kecamatanLabel || (item.kodeKec ? String(item.kodeKec).padStart(3, '0') : '-')}</td>
-                    <td className="px-4 py-3 text-sm text-gray-600">{item.jenisLabel || item.r421 || '-'}</td>
-                    <td className="px-4 py-3 text-sm text-gray-600">{item.skalaLabel || item.r425 || '-'}</td>
+                 <tr key={item.id} className="hover:bg-gray-50 transition">
+                     <td className="px-4 py-3 text-sm text-gray-600 font-medium">{nomorUrut}</td>
+                     <td className="px-4 py-3 text-sm text-gray-800">{item.r421Desk || '-'}</td>
+                     <td className="px-4 py-3 text-sm text-gray-600">{item.kecamatanLabel || (item.kodeKec ? String(item.kodeKec).padStart(3, '0') : '-')}</td>
+                     <td className="px-4 py-3 text-sm text-gray-600">{item.jenisLabel || item.r421 || '-'}</td>
+                     <td className="px-4 py-3 text-sm text-gray-600">{item.skalaLabel || item.r425 || '-'}</td>
                     <td className="px-4 py-3 text-sm">
                       <div className="flex items-center gap-2">
                         <button 

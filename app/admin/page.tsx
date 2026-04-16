@@ -153,7 +153,14 @@ export default function AdminDashboardPage() {
                 <div className="flex items-center justify-between py-3 border-b border-gray-100">
                   <div>
                     <p className="font-medium text-gray-800">Login berhasil</p>
-                    <p className="text-sm text-gray-500">Admin - {new Date().toLocaleDateString('id-ID')}</p>
+                    <p className="text-sm text-gray-500">Admin - {new Date().toLocaleString('id-ID', {
+                      day: 'numeric',
+                      month: 'long',
+                      year: 'numeric',
+                      hour: '2-digit',
+                      minute: '2-digit',
+                      second: '2-digit'
+                    })}</p>
                   </div>
                   <span className="px-2 py-1 rounded-full bg-green-100 text-green-700 text-xs">Berhasil</span>
                 </div>

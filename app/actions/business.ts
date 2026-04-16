@@ -6,6 +6,7 @@ import { eq, and, like, sql } from "drizzle-orm"
 import { KECAMATAN_MAP } from "@/data/master/kecamatan"
 import { P421_MAP } from "@/data/master/p421"
 import { P425_MAP } from "@/data/master/p425"
+import { P426_MAP } from "@/data/master/p426"
 
 export interface BusinessData {
   id: number
@@ -21,9 +22,11 @@ export interface BusinessData {
   r421: number | null
   r424: number | null
   r425: number | null
+  r426: number | null
   kecamatanLabel: string | null | undefined
   jenisLabel: string | null | undefined
   skalaLabel: string | null | undefined
+  internetLabel: string | null | undefined
 }
 
 export interface FilterParams {
@@ -110,10 +113,12 @@ export async function getBusinessData(
     r421: row.r421,
     r424: row.r424,
     r425: row.r425,
+    r426: row.r426,
     // Mapping ke label dengan penanganan kode yang benar
     kecamatanLabel: row.kodeKec ? KECAMATAN_MAP.get(String(row.kodeKec).padStart(3, '0')) : null,
     jenisLabel: row.r421 ? P421_MAP.get(String(row.r421).padStart(2, '0')) : null,
     skalaLabel: row.r425 ? P425_MAP.get(String(Math.round(row.r425))) : null,
+    internetLabel: row.r426 ? P426_MAP.get(String(Math.round(row.r426)).padStart(2, '0')) : null,
   }))
 
   return {
