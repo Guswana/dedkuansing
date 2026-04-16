@@ -8,7 +8,8 @@ import { P421_MAP } from "@/data/master/p421"
 import { P425_MAP } from "@/data/master/p425"
 
 export interface BusinessData {
-  id: string
+  id: number
+  compositeId: string
   kodeProv: number | null
   kodeKab: number | null
   kodeKec: number | null
@@ -96,7 +97,8 @@ export async function getBusinessData(
   const totalPages = Math.ceil(total / limit)
 
   const data: BusinessData[] = rows.map(row => ({
-    id: [row.kodeProv, row.kodeKab, row.kodeKec, row.kodeDesa, row.kodeSls, row.idRt, row.idArt].filter(Boolean).join('-'),
+    id: row.id,
+    compositeId: [row.kodeProv, row.kodeKab, row.kodeKec, row.kodeDesa, row.kodeSls, row.idRt, row.idArt].filter(Boolean).join('-'),
     kodeProv: row.kodeProv,
     kodeKab: row.kodeKab,
     kodeKec: row.kodeKec,
@@ -151,5 +153,23 @@ export async function createBusinessData(data: Partial<typeof dataFinal.$inferIn
     return { success: true, data: result[0] }
   } catch (error) {
     return { success: false, error: 'Gagal menambahkan data' }
+  }
+}
+
+export async function getBusinessById(id: number) {
+  try {
+    const result = await db.select().from(dataFinal).where(eq(dataFinal.id, id)).limit(1)
+    return { success: true, data: result[0] }
+  } catch (error) {
+    return { success: false, error: 'Data tidak ditemukan' }
+  }
+}
+
+export async function updateBusinessData(id: number, data: Partial<typeof dataFinal.$inferInsert>) {
+  try {
+    const result = await db.update(dataFinal).set(data).where(eq(dataFinal.id, id)).returning()
+    return { success: true, data: result[0] }
+  } catch (error) {
+    return { success: false, error: 'Gagal memperbarui data' }
   }
 }

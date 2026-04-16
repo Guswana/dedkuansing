@@ -1,6 +1,7 @@
 'use client'
 
 import { BusinessData, deleteBusinessData } from "@/app/actions/business"
+import { useRouter } from "next/navigation"
 import { useState } from "react"
 
 interface BusinessTableProps {
@@ -16,6 +17,27 @@ interface BusinessTableProps {
 }
 
 export default function BusinessTable({ data, pagination, onPageChange, isLoading, onDataChange }: BusinessTableProps) {
+  const router = useRouter()
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false)
+  const [deletingId, setDeletingId] = useState<number | null>(null)
+  const [isDeleting, setIsDeleting] = useState(false)
+
+  const handleDeleteConfirm = async () => {
+    if (!deletingId) return
+    
+    setIsDeleting(true)
+    try {
+      await deleteBusinessData(deletingId)
+      if (onDataChange) {
+        onDataChange()
+      }
+    } finally {
+      setIsDeleting(false)
+      setDeleteModalOpen(false)
+      setDeletingId(null)
+    }
+  }
+  
   const renderPagination = () => {
     const pages = []
     const maxVisible = 5
@@ -44,7 +66,8 @@ export default function BusinessTable({ data, pagination, onPageChange, isLoadin
   }
 
   return (
-    <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden rounded-t-none border-t-0">
+    <>
+      <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden rounded-t-none border-t-0">
       <div className="overflow-x-auto">
         <table className="w-full">
           <thead className="bg-gray-50 border-b border-gray-200">
@@ -71,7 +94,7 @@ export default function BusinessTable({ data, pagination, onPageChange, isLoadin
                 return (
                   <tr key={item.id} className="hover:bg-gray-50 transition">
                     <td className="px-4 py-3 text-sm text-gray-600 font-medium">{nomorUrut}</td>
-                    <td className="px-4 py-3 text-sm text-gray-600 font-mono">{item.id}</td>
+                    <td className="px-4 py-3 text-sm text-gray-600 font-mono">{item.compositeId}</td>
                     <td className="px-4 py-3 text-sm text-gray-800">{item.r421Desk || '-'}</td>
                     <td className="px-4 py-3 text-sm text-gray-600">{item.kecamatanLabel || (item.kodeKec ? String(item.kodeKec).padStart(3, '0') : '-')}</td>
                     <td className="px-4 py-3 text-sm text-gray-600">{item.jenisLabel || item.r421 || '-'}</td>
@@ -81,25 +104,16 @@ export default function BusinessTable({ data, pagination, onPageChange, isLoadin
                         <button 
                           className="px-2 py-1 text-xs bg-blue-100 text-blue-700 rounded hover:bg-blue-200 transition"
                           onClick={() => {
-                            // Untuk edit bisa diarahkan ke halaman edit atau buka modal
-                            alert('Fitur edit akan segera tersedia')
+                            router.push(`/admin/edit-usaha?id=${item.id}`)
                           }}
                         >
                           Edit
                         </button>
                         <button 
                           className="px-2 py-1 text-xs bg-red-100 text-red-700 rounded hover:bg-red-200 transition"
-                          onClick={async () => {
-                            if (confirm('Yakin ingin menghapus data ini?')) {
-                              // Extract numeric id dari id composite
-                              const numericId = parseInt(item.id.split('-')[0])
-                              if (!isNaN(numericId)) {
-                                await deleteBusinessData(numericId)
-                                if (onDataChange) {
-                                  onDataChange()
-                                }
-                              }
-                            }
+                          onClick={() => {
+                            setDeletingId(item.id)
+                            setDeleteModalOpen(true)
                           }}
                         >
                           Hapus
@@ -154,7 +168,37 @@ export default function BusinessTable({ data, pagination, onPageChange, isLoadin
             </button>
           </div>
         )}
-      </div>
+       </div>
     </div>
+
+    {/* Modal Konfirmasi Hapus */}
+    {deleteModalOpen && (
+      <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
+        <div className="bg-white rounded-xl p-6 max-w-md w-full mx-4 shadow-xl">
+          <h3 className="text-lg font-semibold text-gray-800 mb-4">Konfirmasi Penghapusan</h3>
+          <p className="text-gray-600 mb-6">Apakah Anda yakin ingin menghapus data usaha ini? Tindakan ini tidak dapat dibatalkan.</p>
+          <div className="flex gap-4 justify-end">
+            <button
+              onClick={() => {
+                setDeleteModalOpen(false)
+                setDeletingId(null)
+              }}
+              disabled={isDeleting}
+              className="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition disabled:opacity-50"
+            >
+              Batal
+            </button>
+            <button
+              onClick={handleDeleteConfirm}
+              disabled={isDeleting}
+              className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition disabled:opacity-50"
+            >
+              {isDeleting ? 'Menghapus...' : 'Hapus'}
+            </button>
+          </div>
+        </div>
+      </div>
+    )}
+    </>
   )
 }

@@ -173,14 +173,12 @@ export default function AdminDashboardPage() {
                      className="px-3 py-2 border border-gray-200 rounded-lg text-sm w-full sm:w-64 focus:outline-none focus:ring-2 focus:ring-primary/50"
                    />
                    <p className="text-sm text-gray-500 whitespace-nowrap">Total: {totalData} data</p>
-                   <button 
-                     className="px-3 py-1.5 text-sm bg-primary text-white rounded-lg hover:bg-primary/90 transition"
-                     onClick={() => {
-                       alert('Fitur tambah data akan segera tersedia')
-                     }}
-                   >
-                     + Tambah Usaha
-                   </button>
+                    <button 
+                      className="px-3 py-1.5 text-sm bg-primary text-white rounded-lg hover:bg-primary/90 transition"
+                      onClick={() => router.push('/admin/tambah-usaha')}
+                    >
+                      + Tambah Usaha
+                    </button>
                  </div>
               </div>
             </div>
