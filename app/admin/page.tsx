@@ -40,30 +40,30 @@ export default function AdminDashboardPage() {
 
   const { state: filterState } = useGlobalFilters()
 
-  useEffect(() => {
-    async function loadData() {
-      if (!user) return
-      
-      setIsDataLoading(true)
-      try {
-        const filters: FilterParams = {
-          kodeKec: filterState.kec.selectedCodes,
-          r421: filterState.p421.selectedCodes,
-          r424: filterState.p424.selectedCodes,
-          r425: filterState.p425.selectedCodes,
-          r426: filterState.p426.selectedCodes,
-          search: debouncedSearch,
-        }
-
-        const result = await getBusinessData(currentPage, 20, filters)
-        setBusinessData(result.data)
-        setTotalData(result.total)
-        setTotalPages(result.totalPages)
-      } finally {
-        setIsDataLoading(false)
+  async function loadData() {
+    if (!user) return
+    
+    setIsDataLoading(true)
+    try {
+      const filters: FilterParams = {
+        kodeKec: filterState.kec.selectedCodes,
+        r421: filterState.p421.selectedCodes,
+        r424: filterState.p424.selectedCodes,
+        r425: filterState.p425.selectedCodes,
+        r426: filterState.p426.selectedCodes,
+        search: debouncedSearch,
       }
-    }
 
+      const result = await getBusinessData(currentPage, 10, filters)
+      setBusinessData(result.data)
+      setTotalData(result.total)
+      setTotalPages(result.totalPages)
+    } finally {
+      setIsDataLoading(false)
+    }
+  }
+
+  useEffect(() => {
     if (user) {
       loadData()
     }
@@ -164,16 +164,24 @@ export default function AdminDashboardPage() {
             <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-4 border-b-0 rounded-b-none">
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                 <h3 className="font-semibold text-gray-800">Daftar Usaha</h3>
-                <div className="flex items-center gap-4">
-                  <input
-                    type="text"
-                    placeholder="Cari usaha..."
-                    value={searchQuery}
-                    onChange={(e) => handleSearchChange(e.target.value)}
-                    className="px-3 py-2 border border-gray-200 rounded-lg text-sm w-full sm:w-64 focus:outline-none focus:ring-2 focus:ring-primary/50"
-                  />
-                  <p className="text-sm text-gray-500 whitespace-nowrap">Total: {totalData} data</p>
-                </div>
+                 <div className="flex items-center gap-4">
+                   <input
+                     type="text"
+                     placeholder="Cari usaha..."
+                     value={searchQuery}
+                     onChange={(e) => handleSearchChange(e.target.value)}
+                     className="px-3 py-2 border border-gray-200 rounded-lg text-sm w-full sm:w-64 focus:outline-none focus:ring-2 focus:ring-primary/50"
+                   />
+                   <p className="text-sm text-gray-500 whitespace-nowrap">Total: {totalData} data</p>
+                   <button 
+                     className="px-3 py-1.5 text-sm bg-primary text-white rounded-lg hover:bg-primary/90 transition"
+                     onClick={() => {
+                       alert('Fitur tambah data akan segera tersedia')
+                     }}
+                   >
+                     + Tambah Usaha
+                   </button>
+                 </div>
               </div>
             </div>
 
@@ -186,6 +194,7 @@ export default function AdminDashboardPage() {
               }}
               onPageChange={handlePageChange}
               isLoading={isDataLoading}
+              onDataChange={() => loadData()}
             />
           </div>
           <Footer />

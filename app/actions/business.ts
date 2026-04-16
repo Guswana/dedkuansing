@@ -3,6 +3,9 @@
 import { db } from "@/src/db"
 import { dataFinal } from "@/src/db/schema"
 import { eq, and, like, sql } from "drizzle-orm"
+import { KECAMATAN_MAP } from "@/data/master/kecamatan"
+import { P421_MAP } from "@/data/master/p421"
+import { P425_MAP } from "@/data/master/p425"
 
 export interface BusinessData {
   id: string
@@ -17,6 +20,9 @@ export interface BusinessData {
   r421: number | null
   r424: number | null
   r425: number | null
+  kecamatanLabel: string | null | undefined
+  jenisLabel: string | null | undefined
+  skalaLabel: string | null | undefined
 }
 
 export interface FilterParams {
@@ -102,6 +108,10 @@ export async function getBusinessData(
     r421: row.r421,
     r424: row.r424,
     r425: row.r425,
+    // Mapping ke label dengan penanganan kode yang benar
+    kecamatanLabel: row.kodeKec ? KECAMATAN_MAP.get(String(row.kodeKec).padStart(3, '0')) : null,
+    jenisLabel: row.r421 ? P421_MAP.get(String(row.r421).padStart(2, '0')) : null,
+    skalaLabel: row.r425 ? P425_MAP.get(String(Math.round(row.r425))) : null,
   }))
 
   return {
@@ -123,5 +133,23 @@ export async function getFilterOptions() {
     kecamatan: kecamatan.map(k => k.kodeKec).filter(Boolean),
     jenisUsaha: jenisUsaha.map(j => ({ kode: j.r421, deskripsi: j.deskripsi })).filter(j => j.kode),
     skalaUsaha: skalaUsaha.map(s => s.r424).filter(Boolean)
+  }
+}
+
+export async function deleteBusinessData(id: number) {
+  try {
+    await db.delete(dataFinal).where(eq(dataFinal.id, id))
+    return { success: true }
+  } catch (error) {
+    return { success: false, error: 'Gagal menghapus data' }
+  }
+}
+
+export async function createBusinessData(data: Partial<typeof dataFinal.$inferInsert>) {
+  try {
+    const result = await db.insert(dataFinal).values(data).returning()
+    return { success: true, data: result[0] }
+  } catch (error) {
+    return { success: false, error: 'Gagal menambahkan data' }
   }
 }
