@@ -1,5 +1,18 @@
 import { sqliteTable, text, integer, real } from "drizzle-orm/sqlite-core";
 
+// Tabel Admin User
+export const adminUsers = sqliteTable("admin_users", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  username: text("username").notNull().unique(),
+  passwordHash: text("password_hash").notNull(),
+  name: text("name"),
+  role: text("role").default("admin"),
+  createdAt: integer("created_at", { mode: "timestamp" }).defaultNow(),
+});
+
+export type AdminUser = typeof adminUsers.$inferSelect;
+export type NewAdminUser = typeof adminUsers.$inferInsert;
+
 export const dataFinal = sqliteTable("data_final", {
   id: integer("id").primaryKey({ autoIncrement: true }),
   kodeProv: integer("kode_prov"),
